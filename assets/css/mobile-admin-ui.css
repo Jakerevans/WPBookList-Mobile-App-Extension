@@ -1,0 +1,30 @@
+#wpbooklist-mobile-div{
+	text-align:center;
+}
+
+#wpbooklist-mobile-page-post label{
+	width: 245px;
+    display: inline-block;
+    line-height: 2;
+    text-align: left;
+}
+
+#wpbooklist-jre-mobile-create-page, #wpbooklist-jre-mobile-create-post{
+	position: relative;
+    top: 2px;
+}
+
+#wpbooklist-submit-mobile{
+	margin-bottom: 40px;
+    margin-top: 10px;
+}
+
+#wpbooklist-mobile-success-div{
+	position: relative;
+    bottom: 30px;
+}
+
+#wpbooklist-spinner-mobile{
+	position: relative;
+    bottom: 35px;
+}
