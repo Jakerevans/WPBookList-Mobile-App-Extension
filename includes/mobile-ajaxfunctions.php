@@ -6,18 +6,29 @@ function wpbooklist_mobile_page_post_action_javascript() {
   	<script type="text/javascript" >
   	"use strict";
   	jQuery(document).ready(function($) {
-	  	$("#wpbooklist-submit-mobile").click(function(event){
+	  	$("#wpbooklist-mobile-admin-savesettings-button").click(function(event){
 
 	  		$('.wpbooklist-spinner').animate({'opacity':'1'});
 
-	  		var createpage = $('#wpbooklist-jre-mobile-create-page').prop('checked');
-	  		var createpost = $('#wpbooklist-jre-mobile-create-post').prop('checked');
+	  		var roles = '';
+	  		$('.wpbooklist-mobile-rolescheckboxes').each(function(){
+	  			if($(this).prop('checked')){
+	  				roles = roles+$(this).val()+'---';
+	  			}
+	  		});
+
+	  		var libs = '';
+	  		$('.wpbooklist-mobile-libscheckboxes').each(function(){
+	  			if($(this).prop('checked')){
+	  				libs = libs+$(this).val()+'---';
+	  			}
+	  		});
 
 		  	var data = {
 				'action': 'wpbooklist_mobile_page_post_action',
 				'security': '<?php echo wp_create_nonce( "wpbooklist_mobile_page_post_action_callback" ); ?>',
-				'createpage':createpage,
-				'createpost':createpost
+				'roles':roles,
+				'libs':libs
 			};
 			console.log(data);
 
@@ -30,8 +41,7 @@ function wpbooklist_mobile_page_post_action_javascript() {
 			    	if(response == 1){
 			    		$('#wpbooklist-mobile-success-div').html('<span id="wpbooklist-add-book-success-span">Success!</span><br/><br/> You\'ve updated your Mobile App Settings!<div id="wpbooklist-addstylepak-success-thanks">Thanks for using WPBooklist! If you happen to be thrilled with WPBookList, then by all means, <a id="wpbooklist-addbook-success-review-link" href="https://wordpress.org/support/plugin/wpbooklist/reviews/?filter=5">Feel Free to Leave a 5-Star Review Here!</a><img id="wpbooklist-smile-icon-1" src="http://evansclienttest.com/wp-content/plugins/wpbooklist/assets/img/icons/smile.png"></div>');
 			    	}
-			    	$('.wpbooklist-spinner').animate({'opacity':'0'});
-			    	console.log(response);
+			    	document.location.reload(true);
 			    },
 				error: function(jqXHR, textStatus, errorThrown) {
 					console.log(errorThrown);
@@ -51,14 +61,14 @@ function wpbooklist_mobile_page_post_action_javascript() {
 function wpbooklist_mobile_page_post_action_callback(){
 	global $wpdb;
 	check_ajax_referer( 'wpbooklist_mobile_page_post_action_callback', 'security' );
-	$createpage = filter_var($_POST['createpage'],FILTER_SANITIZE_STRING);
-	$createpost = filter_var($_POST['createpost'],FILTER_SANITIZE_STRING);
+	$roles = filter_var($_POST['roles'],FILTER_SANITIZE_STRING);
+	$libs = filter_var($_POST['libs'],FILTER_SANITIZE_STRING);
 
 	$table_name = $wpdb->prefix.'wpbooklist_jre_mobile_table';
 
 	$data = array(
-		'createpage' => $createpage,
-		'createpost' => $createpost
+		'rolesallowed' => $roles,
+		'excludedlibs' => $libs
 	);
 	$format = array( '%s', '%s'); 
 	$where = array( 'ID' => 1 );

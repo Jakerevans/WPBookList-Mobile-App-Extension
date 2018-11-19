@@ -3,7 +3,7 @@
 }
 
 #wpbooklist-mobile-page-post label{
-	width: 245px;
+    max-width: 600px;
     display: inline-block;
     line-height: 2;
     text-align: left;
@@ -27,4 +27,36 @@
 #wpbooklist-spinner-mobile{
 	position: relative;
     bottom: 35px;
+}
+
+#wpbooklist-mobile-users-check-div-checkboxes{
+
+}
+
+#wpbooklist-mobile-users-check-div-checkboxes div{
+    text-align: justify;
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+#wpbooklist-mobile-users-check-div-checkboxes div input{
+    
+}
+
+#wpbooklist-mobile-users-check-div-checkboxes div label{
+    position: relative;
+    bottom: 2px;
+    margin-right: 5px;
+}
+
+.wpbooklist-mobile-title{
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 20px;
+}
+
+#wpbooklist-mobile-admin-savesettings-button{
+    margin-top:40px;
 }
